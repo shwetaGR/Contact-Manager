@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Manager</title>
+    </head>
+    <body>
+        <h1>Contact Manager</h1>
+        <h2>listing Contacts-<span id="count">0</span></h2>
+        <!-- <form> -->
+            <input type="text" placeholder="search by name or mobile" id="search"/>
+        <!-- </form> -->
+        <ul id="list">
+
+        </ul>
+        <script>
+
+            const contacts=[
+                {id:1,name:'steve',mobile:"6854213255"},
+                {id:2,name:'jack',mobile:"8654514965"},
+                {id:3,name:'kriss',mobile:"876549465"},
+                {id:4,name:'jhon',mobile:"9875649564"}
+            ]
+          const  countHandle=document.getElementById("count")
+          const listHandle=document.getElementById("list")
+         const  searchHandle=document.getElementById("search")
+
+            countHandle.textContent=contacts.length
+
+          function  liMaker(arr){
+
+arr.forEach(function(ele){
+           const liTag=document.createElement("li")
+           liTag.textContent=`${ele.name}-${ele.mobile}`
+           listHandle.appendChild(liTag)
+           
+        })
+    }
+    liMaker(contacts)
+        searchHandle.addEventListener('keyup', function(e){
+            const searchItems=e.target.value
+            const result=contacts.filter(function(ele){
+                return ele.name.includes(searchItems)||ele.mobile.includes(searchItems)
+// return `${ele.name}${ele.mobile}`.includes(searchItems)
+            })
+        
+        countHandle.textContent=result.length
+        listHandle.innerHTML=''
+
+
+        liMaker(result)
+        // result.forEach(function(ele){
+        //    const liTag=document.createElement("li")
+        //    liTag.textContent=`${ele.name}-${ele.mobile}`
+        //    listHandle.appendChild(liTag)
+           
+        // })
+
+        })
+
+       </script>
+    
+    </body>
+</html>
